@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+.label {
+  display: block;
+  font-size: $text-sm;
+  color: $muted-foreground;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.input {
+  font-size: $text-sm;
+  font-weight: 500;
+  height: $s-9;
+  width: 100%;
+  border-radius: $rounded-md;
+  border: 1px solid $input;
+  background-color: transparent;
+  padding-inline: $s-3;
+  padding-block: $s-1;
+  margin-top: $s-2;
+
+  &::placeholder {
+    color: $muted-foreground;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 50%;
+  }
+}
