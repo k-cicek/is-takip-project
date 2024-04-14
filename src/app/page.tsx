@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
+import JobList from "@/components/JobList/jobList";
 import NewJob from "@/components/NewJob";
 import { AppContext } from "@/contexts/AppContext";
 import { useContext, useEffect } from "react";
@@ -25,7 +26,6 @@ export default function Home() {
     };
 
     fn().catch(console.error);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ctx.setPriorities]);
 
   return (
@@ -33,6 +33,7 @@ export default function Home() {
       <Header />
       <main>
         <NewJob />
+        <JobList />
       </main>
     </div>
   );
