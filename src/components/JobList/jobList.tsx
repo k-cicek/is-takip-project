@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '@/contexts/AppContext';
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { GrEdit } from "react-icons/gr";
 
 const priorityColors = {
     "Urgent": "#c82333",
@@ -38,7 +40,8 @@ function JobList() {
                                 <button className={job.priority.toLowerCase()}>{job.priority}</button>
                             </td>
                             <td>
-                                <button onClick={() => handleDelete(job.name)}>Delete</button>
+                                <button><GrEdit /></button>
+                                <button onClick={() => handleDelete(job.name)}><RiDeleteBin6Line /></button>
                             </td>
                         </tr>
                     ))}
