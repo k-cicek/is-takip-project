@@ -31,10 +31,7 @@ function NewJob(): React.ReactElement {
           <Input
             label="Job Name"
             value={jobName}
-            onChange={(e) => {
-              setJobName(e.target.value);
-              console.log(e.target.value);
-            }}
+            onChange={(e) => setJobName(e.target.value)}
           />
         </div>
 
