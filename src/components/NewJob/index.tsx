@@ -4,6 +4,8 @@ import Select from "react-select";
 import Input from "../Input";
 import { ChangeEvent, useContext, useState } from "react";
 import { AppContext } from "@/contexts/AppContext";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function NewJob(): React.ReactElement {
   const ctx = useContext(AppContext);
@@ -20,12 +22,15 @@ function NewJob(): React.ReactElement {
 
       setJobName("")
       setPriority(null)
+    } else {
+      toast.error("All fields are required.");
     }
   };
 
   return (
     <div className="new-job">
       <div className="title">Create New Job</div>
+      <ToastContainer />
       <div className="job-wrapper">
         <div className="job-input">
           <Input
