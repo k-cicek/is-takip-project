@@ -1,15 +1,18 @@
 .table-wrapper {
   overflow-x: auto;
+  width: 100%;
 
   .job-table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    table-layout: fixed;
 
     th,
     td {
       padding: 8px;
       text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     th {
@@ -24,6 +27,26 @@
       border: none;
       border-radius: 3px;
       cursor: pointer;
+    }
+    tr {
+      display: grid;
+      grid-template-columns: 3fr 1fr 0.5fr;
+    }
+  }
+}
+
+td:nth-child(2) {
+  button {
+    &.urgent {
+      background-color: #c82333;
+    }
+
+    &.regular {
+      background-color: #dfa800;
+    }
+
+    &.trivial {
+      background-color: #0168d9;
     }
   }
 }

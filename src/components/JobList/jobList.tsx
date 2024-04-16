@@ -1,6 +1,12 @@
 import React, { useContext } from 'react';
 import { AppContext } from '@/contexts/AppContext';
 
+const priorityColors = {
+    "Urgent": "#c82333",
+    "Regular": "#dfa800",
+    "Trivial": "#0168d9"
+};
+
 function JobList() {
     const ctx = useContext(AppContext);
 
@@ -28,7 +34,9 @@ function JobList() {
                     {sortedJobs.map((job) => (
                         <tr className={job.priority.toLowerCase()} key={job.name}>
                             <td>{job.name}</td>
-                            <td>{job.priority}</td>
+                            <td>
+                                <button className={job.priority.toLowerCase()}>{job.priority}</button>
+                            </td>
                             <td>
                                 <button onClick={() => handleDelete(job.name)}>Delete</button>
                             </td>
