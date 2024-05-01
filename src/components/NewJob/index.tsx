@@ -2,7 +2,7 @@
 
 import Select from "react-select";
 import Input from "../Input";
-import { ChangeEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "@/contexts/AppContext";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,6 +35,7 @@ function NewJob(): React.ReactElement {
         <div className="job-input">
           <Input
             label="Job Name"
+            type="text"
             value={jobName}
             onChange={(e) => setJobName(e.target.value)}
           />
