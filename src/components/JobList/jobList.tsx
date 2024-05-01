@@ -4,6 +4,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrEdit } from "react-icons/gr";
 import { Job } from "@/lib/types";
 import ModalComponent from '../Modal/modal';
+import FilterComponent from '../Filter';
 
 
 function JobList() {
@@ -11,12 +12,14 @@ function JobList() {
     const [selectedJob, setSelectedJob] = useState<Job | null>(null);
     const [selectedPriority, setSelectedPriority] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [nameFilter, setNameFilter] = useState<string>('');
+    const [priorityFilter, setPriorityFilter] = useState<string>('All');
 
 
-
-    const sortedJobs = ctx.jobs.sort((a: Job, b: Job) =>
-        ctx.priorities.indexOf(a.priority) - ctx.priorities.indexOf(b.priority)
-    );
+    const sortedJobs = ctx.jobs
+        .filter(job => job.name.toLowerCase().includes(nameFilter.toLowerCase()))
+        .filter(job => priorityFilter === 'All' ? true : job.priority === priorityFilter)
+        .sort((a: Job, b: Job) => ctx.priorities.indexOf(a.priority) - ctx.priorities.indexOf(b.priority));
 
     const handleDelete = (name: string) => {
         if (window.confirm("Are you sure you want to delete this job?")) {
@@ -46,6 +49,13 @@ function JobList() {
 
     return (
         <div className='table-wrapper'>
+            <FilterComponent
+                nameFilter={nameFilter}
+                setNameFilter={setNameFilter}
+                priorityFilter={priorityFilter}
+                setPriorityFilter={setPriorityFilter}
+                priorities={ctx.priorities}
+            />
             <table className="job-table">
                 <thead>
                     <tr>
