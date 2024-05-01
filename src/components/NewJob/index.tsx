@@ -42,7 +42,7 @@ function NewJob(): React.ReactElement {
         </div>
 
         <div className="job-priority">
-          <div>Job Priority</div>
+          <div className="job-priority-title">Job Priority</div>
           <Select
             options={ctx.priorities.map((p) => ({ value: p, label: p }))}
             className="job-priority-select"
@@ -55,7 +55,6 @@ function NewJob(): React.ReactElement {
             }}
           />
         </div>
-
         <button className="job-create" onClick={handleClick}>Create</button>
       </div>
     </div>

@@ -10,18 +10,27 @@
 .job {
   &-wrapper {
     margin-top: $s-4;
-    display: flex;
+    display: grid;
+    grid-template-columns: 3fr 1.5fr 0.5fr;
     align-items: center;
     width: 100%;
   }
 
   &-input {
     flex-grow: 1;
+    padding-right: 15px;
   }
 
   &-priority {
     height: 100%;
-    margin-left: $s-12;
+
+    &-title {
+      display: block;
+      font-size: $text-sm;
+      color: $muted-foreground;
+      font-weight: 500;
+      line-height: 1;
+    }
 
     &-select {
       margin-top: $s-2;
@@ -29,9 +38,9 @@
   }
 
   &-create {
-    height: 48px;
-    margin-top: $s-6;
-    margin-left: $s-5;
+    height: 46px;
+    margin-top: $s-5;
+    margin-left: $s-4;
 
     background-color: $primary;
     border-radius: $rounded-md;
