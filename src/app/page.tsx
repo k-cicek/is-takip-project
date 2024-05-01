@@ -4,17 +4,8 @@ import Header from "@/components/Header";
 import JobList from "@/components/JobList/jobList";
 import NewJob from "@/components/NewJob";
 import { AppContext } from "@/contexts/AppContext";
+import { getPriorities } from "@/lib/priorities";
 import { useContext, useEffect } from "react";
-
-async function getPriorities() {
-  const res = await fetch("http://localhost:3000/priorities");
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
 
 export default function Home() {
   const ctx = useContext(AppContext);

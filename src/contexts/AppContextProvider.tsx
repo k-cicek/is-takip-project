@@ -4,6 +4,7 @@ import { Job } from "@/lib/types";
 import { AppContext, defaultValues } from "./AppContext";
 import { useEffect, useState } from "react";
 import { addJob, deleteJob, readJobs } from "@/lib/storage";
+import { getPriorities } from "@/lib/priorities";
 
 interface AppContextProviderProps {
   children: React.ReactNode;
@@ -26,6 +27,7 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
 
     loadPrioritiesAndJobs().catch(console.error);
   }, []);
+
 
   const addNewJob = (job: Job) => {
     setJobs([...jobs, job]);
@@ -55,21 +57,11 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
         setPriorities,
         addJob: addNewJob,
         deleteJob: removeJob,
-        updateJob: updateJob
+        updateJob: updateJob,
       }}
     >
       {children}
     </AppContext.Provider>
   );
-}
-
-async function getPriorities() {
-  const res = await fetch("http://localhost:3000/priorities");
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
 }
 
