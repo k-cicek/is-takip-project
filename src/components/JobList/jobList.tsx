@@ -21,9 +21,9 @@ function JobList() {
         .filter(job => priorityFilter === 'All' ? true : job.priority === priorityFilter)
         .sort((a: Job, b: Job) => ctx.priorities.indexOf(a.priority) - ctx.priorities.indexOf(b.priority));
 
-    const handleDelete = (name: string) => {
+    const handleDelete = (id: string) => {
         if (window.confirm("Are you sure you want to delete this job?")) {
-            ctx.deleteJob(name);
+            ctx.deleteJob(id);
         }
     };
 
@@ -66,14 +66,14 @@ function JobList() {
                 </thead>
                 <tbody>
                     {sortedJobs.map((job) => (
-                        <tr className={job.priority.toLowerCase()} key={job.name}>
+                        <tr className={job.priority.toLowerCase()} key={job.id}>
                             <td>{job.name}</td>
                             <td>
                                 <button className={job.priority.toLowerCase()}>{job.priority}</button>
                             </td>
                             <td>
                                 <button onClick={() => openModal(job)}><GrEdit /></button>
-                                <button onClick={() => handleDelete(job.name)}><RiDeleteBin6Line /></button>
+                                <button onClick={() => handleDelete(job.id)}><RiDeleteBin6Line /></button>
                             </td>
                         </tr>
                     ))}

@@ -11,14 +11,17 @@ function NewJob(): React.ReactElement {
   const ctx = useContext(AppContext);
   const [priority, setPriority] = useState<string | null>(null);
   const [jobName, setJobName] = useState("");
+  const [idCounter, setIdCounter] = useState(0);
 
   const handleClick = () => {
     if (jobName && priority) {
       // Yeni iş kaydı oluşturma
-      const newJob = { name: jobName, priority: priority }
+      const newJob = { id: idCounter.toString(), name: jobName, priority: priority }
 
       //İş kaydı ekleme
       ctx.addJob(newJob)
+
+      setIdCounter(idCounter + 1);
 
       setJobName("")
       setPriority(null)

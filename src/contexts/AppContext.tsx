@@ -7,7 +7,7 @@ export type TAppContextState = {
   jobs: Job[];
   setPriorities: React.Dispatch<React.SetStateAction<string[]>>;
   addJob: (job: Job) => void
-  deleteJob: (name: string) => void;
+  deleteJob: (id: string) => void;
   updateJob: (updatedJob: Job) => void;
 
 };

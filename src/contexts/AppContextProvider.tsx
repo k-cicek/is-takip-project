@@ -33,10 +33,11 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     setJobs([...jobs, job]);
     addJob(job); // LocalStorage'a da ekleyin
   };
-  const removeJob = (name: string) => {
-    const updatedJobs = jobs.filter(job => job.name !== name);
+
+  const removeJob = (id: string) => {
+    const updatedJobs = jobs.filter(job => job.id !== id);
     setJobs(updatedJobs);
-    deleteJob(name); // LocalStorage'dan da kaldırın
+    deleteJob(id); // LocalStorage'dan da kaldırın
   };
 
   const updateJob = (updatedJob: Job) => {
