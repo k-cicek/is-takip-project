@@ -21,8 +21,11 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
     const loadPrioritiesAndJobs = async () => {
       const p = await getPriorities();
       setPriorities(p);
-      const j = readJobs();
-      setJobs(j);
+
+      const storedJobs = localStorage.getItem('jobs');
+      if (storedJobs) {
+        setJobs(JSON.parse(storedJobs));
+      }
     };
 
     loadPrioritiesAndJobs().catch(console.error);
@@ -42,12 +45,15 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
 
   const updateJob = (updatedJob: Job) => {
     const updatedJobs = jobs.map(job => {
-      if (job.name === updatedJob.name) {
+      if (job.id === updatedJob.id) {
         return updatedJob;
       }
       return job;
     });
     setJobs(updatedJobs);
+
+    // Local storage'a işleri kaydet
+    localStorage.setItem('jobs', JSON.stringify(updatedJobs));
   };
 
   return (
