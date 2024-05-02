@@ -1,0 +1,54 @@
+.confirm-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 30px;
+    width: 400px;
+    height: 100px;
+    max-width: 80%;
+    p {
+      font-weight: 600;
+    }
+  }
+
+  &-button {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    width: 100%;
+    button {
+      border: none;
+      padding: 8px 60px;
+      &:first-child {
+        background-color: grey;
+        color: rgb(193, 189, 189);
+
+        &:hover {
+          background-color: darken(grey, 10%);
+        }
+      }
+
+      &:nth-child(2) {
+        background-color: rgb(233, 69, 97);
+        color: white;
+
+        &:hover {
+          background-color: darken(pink, 30%);
+        }
+      }
+    }
+  }
+}
