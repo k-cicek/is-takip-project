@@ -5,6 +5,7 @@ import { GrEdit } from "react-icons/gr";
 import { Job } from "@/lib/types";
 import ModalComponent from '../Modal/modal';
 import FilterComponent from '../Filter';
+import ConfirmDialog from '../ConfirmDialog';
 
 
 function JobList() {
@@ -14,6 +15,7 @@ function JobList() {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [nameFilter, setNameFilter] = useState<string>('');
     const [priorityFilter, setPriorityFilter] = useState<string>('All');
+    const [confirmDialog, setConfirmDialog] = useState<{ isOpen: boolean, message: string, onConfirm: () => void } | null>(null);
 
 
     const sortedJobs = ctx.jobs
@@ -22,9 +24,14 @@ function JobList() {
         .sort((a: Job, b: Job) => ctx.priorities.indexOf(a.priority) - ctx.priorities.indexOf(b.priority));
 
     const handleDelete = (id: string) => {
-        if (window.confirm("Are you sure you want to delete this job?")) {
-            ctx.deleteJob(id);
-        }
+        setConfirmDialog({
+            isOpen: true,
+            message: "Are you sure you want to delete it?",
+            onConfirm: () => {
+                ctx.deleteJob(id);
+                setConfirmDialog(null);
+            }
+        });
     };
 
     const openModal = (job: Job) => {
@@ -88,6 +95,8 @@ function JobList() {
                 onSave={onSave}
                 priorities={ctx.priorities}
             />
+            {confirmDialog && <ConfirmDialog message={confirmDialog.message} onConfirm={confirmDialog.onConfirm} onCancel={() => setConfirmDialog(null)} />}
+
         </div>
     );
 }
