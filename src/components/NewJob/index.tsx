@@ -6,22 +6,21 @@ import { useContext, useState } from "react";
 import { AppContext } from "@/contexts/AppContext";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { v4 as uuidv4 } from 'uuid';
 
 function NewJob(): React.ReactElement {
   const ctx = useContext(AppContext);
   const [priority, setPriority] = useState<string | null>(null);
   const [jobName, setJobName] = useState("");
-  const [idCounter, setIdCounter] = useState(0);
 
   const handleClick = () => {
     if (jobName && priority) {
       // Yeni iş kaydı oluşturma
-      const newJob = { id: idCounter.toString(), name: jobName, priority: priority }
+      const newJob = { id: uuidv4(), name: jobName, priority: priority }
 
       //İş kaydı ekleme
       ctx.addJob(newJob)
 
-      setIdCounter(idCounter + 1);
 
       setJobName("")
       setPriority(null)
@@ -53,6 +52,7 @@ function NewJob(): React.ReactElement {
             onChange={(newValue) => {
               setPriority(newValue?.value ?? null);
             }}
+            value={priority ? { value: priority, label: priority } : null}
             styles={{
               control: (baseStyles, state) => ({ ...baseStyles, height: 46 }),
             }}
