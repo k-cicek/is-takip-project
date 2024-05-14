@@ -16,7 +16,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
-      if (newValue.length <= 255 && (newValue === "" || /^[a-z0-9 ]+$/i.test(newValue))) {
+      if (newValue.length <= 255 && (newValue === "" || /^[a-z0-9ğüşıöçĞÜŞİÖÇ. ]+$/i.test(newValue))) {
         setInnerValue(newValue);
         if (onChange) {
           onChange(e);

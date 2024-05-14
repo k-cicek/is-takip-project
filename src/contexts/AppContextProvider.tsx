@@ -50,6 +50,7 @@ export function AppContextProvider({ children }: AppContextProviderProps) {
       }
       return job;
     });
+    console.log(updatedJobs);
     setJobs(updatedJobs);
 
     // Local storage'a işleri kaydet

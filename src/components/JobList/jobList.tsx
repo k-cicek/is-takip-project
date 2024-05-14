@@ -17,11 +17,20 @@ function JobList() {
     const [priorityFilter, setPriorityFilter] = useState<string>('All');
     const [confirmDialog, setConfirmDialog] = useState<{ isOpen: boolean, message: string, onConfirm: () => void } | null>(null);
 
+    const nameFilteredJobs = ctx.jobs
+        .filter(job =>
+            job.name.toLowerCase().includes(nameFilter.toLowerCase()) ||
+            job.priority.toLowerCase().includes(nameFilter.toLowerCase())
+        );
 
-    const sortedJobs = ctx.jobs
-        .filter(job => job.name.toLowerCase().includes(nameFilter.toLowerCase()))
-        .filter(job => priorityFilter === 'All' ? true : job.priority === priorityFilter)
-        .sort((a: Job, b: Job) => ctx.priorities.indexOf(a.priority) - ctx.priorities.indexOf(b.priority));
+    const sortedJobs = nameFilteredJobs
+        .filter(job =>
+            priorityFilter === 'All' ? true : job.priority === priorityFilter
+        )
+        .sort((a: Job, b: Job) => {
+            const priorityComparison = ctx.priorities.indexOf(a.priority) - ctx.priorities.indexOf(b.priority);
+            return priorityComparison !== 0 ? priorityComparison : a.name.localeCompare(b.name);
+        });
 
     const handleDelete = (id: string) => {
         setConfirmDialog({
@@ -49,10 +58,12 @@ function JobList() {
             const updatedJob = { ...selectedJob, priority: selectedPriority };
             ctx.updateJob(updatedJob);
             setIsModalOpen(false);
+            console.log(updatedJob)
         } else {
             console.error('selectedJob or selectedPriority is null');
         }
     };
+
 
     return (
         <div className='table-wrapper'>
